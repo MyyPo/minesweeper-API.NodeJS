@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const gameSchema = new mongoose.Schema({
-  user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  user: { type: mongoose.Schema.Types.ObjectId, ref: "User", unique: true },
   mode: {
     type: String,
     required: [true, "Please choose game mode"],
@@ -12,6 +12,9 @@ const gameSchema = new mongoose.Schema({
     },
   },
   field: [Array],
+  startingField: [Array],
+  width: { type: Number, required: true, immutable: true },
+  height: { type: Number, required: true, immutable: true },
 });
 
 module.exports = mongoose.model("Game", gameSchema);
