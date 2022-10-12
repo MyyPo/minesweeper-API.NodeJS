@@ -1,11 +1,11 @@
 const prepareField = require("../src/services/prepareField");
 
 const matrix = [
-  [0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0],
+  [false, false, false, false, false],
+  [false, false, false, false, false],
+  [false, false, false, false, false],
+  [false, false, false, false, false],
+  [false, false, false, false, false],
 ];
 
 test("at least 1 mine created", () => {

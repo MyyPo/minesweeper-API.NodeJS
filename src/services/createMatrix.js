@@ -1,7 +1,7 @@
-const createMatrix = (width, height) => {
+const createMatrix = (width, height, filling) => {
   return Array(width)
     .fill([])
-    .map(() => Array(height).fill(0));
+    .map(() => Array(height).fill(filling));
 };
 
 module.exports = createMatrix;
