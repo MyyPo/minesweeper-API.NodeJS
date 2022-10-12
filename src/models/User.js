@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 
-const userSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, "Please provide player nickname"],
@@ -24,4 +25,14 @@ const userSchema = new mongoose.Schema({
   bestResults: { type: Number },
 });
 
-module.exports = mongoose.model("User", userSchema);
+UserSchema.pre("save", async function () {
+  if (!this.isModified("password")) return;
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
+
+UserSchema.methods.comparePassword = async function (canditatePassword) {
+  return await bcrypt.compare(canditatePassword, this.password);
+};
+
+module.exports = mongoose.model("User", UserSchema);

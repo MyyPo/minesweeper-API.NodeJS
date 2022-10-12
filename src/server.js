@@ -2,7 +2,10 @@ const express = require("express");
 require("express-async-errors");
 const app = express();
 require("dotenv").config();
+const cookieParser = require("cookie-parser");
+
 app.use(express.json());
+app.use(cookieParser(process.env.JWT_SECRET));
 
 const connectDB = require("./db/connect");
 
@@ -21,6 +24,8 @@ const miscRoutes = require("./routes/miscRoutes");
 app.use("/api/v1/misc", miscRoutes);
 const gameRoutes = require("./routes/gameRoutes");
 app.use("/api/v1/game", gameRoutes);
+const authRoutes = require("./routes/authRoutes");
+app.use("/api/v1/auth", authRoutes);
 
 const port = process.env.PORT || 8000;
 const start = async () => {

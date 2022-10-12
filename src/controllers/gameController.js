@@ -11,13 +11,13 @@ const User = require("../models/User");
 
 const playGame = async (req, res) => {
   let { x, y } = req.body;
-  const currentGame = await Game.findOne({ user: "634301e805c36e40e3ba2843" });
+  const currentGame = await Game.findOne({ user: req.user.userId });
   if (currentGame) {
     [x, y] = sanitizeTurn(x, y, currentGame);
     if (Service.checkIfLost(x, y, currentGame.field)) {
       currentGame.uncoveredField[y][x] = "m";
       await Game.deleteOne({
-        user: "634301e805c36e40e3ba2843",
+        user: req.user.userId,
       });
       res.status(StatusCodes.OK).json({
         msg: "Game over",
@@ -35,7 +35,7 @@ const playGame = async (req, res) => {
       );
 
       await Game.updateOne(
-        { user: "634301e805c36e40e3ba2843" },
+        { user: req.user.userId },
         { uncoveredField: newUncoveredField }
       );
       res.status(StatusCodes.OK).json({
@@ -45,7 +45,7 @@ const playGame = async (req, res) => {
       });
     }
   } else {
-    throw new CustomError.BasicAPIError(
+    throw new CustomError.BadRequestError(
       `This user doesn't have an active game, please, create one first.`,
       400
     );

@@ -1,9 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const { startCustomGame } = require("../controllers/startController");
-const { startRankedGame } = require("../controllers/startController");
+const { authenticateUser } = require("../middleware/authentication");
 
-router.route("/CustomGame").post(startCustomGame);
-router.route("/RankedGame").post(startRankedGame);
+const {
+  startCustomGame,
+  startRankedGame,
+} = require("../controllers/startController");
+
+router.route("/CustomGame").post(authenticateUser, startCustomGame);
+router.route("/RankedGame").post(authenticateUser, startRankedGame);
 
 module.exports = router;

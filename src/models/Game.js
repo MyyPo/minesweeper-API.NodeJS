@@ -13,7 +13,6 @@ const gameSchema = new mongoose.Schema({
   },
   field: [Array],
   uncoveredField: [Array],
-  flaggedField: [Array],
   width: { type: Number, required: true, immutable: true },
   height: { type: Number, required: true, immutable: true },
 });
