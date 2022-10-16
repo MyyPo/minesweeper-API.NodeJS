@@ -1,9 +1,11 @@
 const sanitizeTurn = require("../src/utils/sanitizeTurn");
+const createMatrix = require("../src/services/createMatrix");
 
 const correctValues = {
   game: {
     width: 16,
     height: 16,
+    uncoveredField: createMatrix(16, 16, false),
   },
   x: 4,
   y: 1,
@@ -19,6 +21,7 @@ const outOfRangeValues = {
   game: {
     width: 12,
     height: 12,
+    uncoveredField: createMatrix(12, 12, false),
   },
   x: 18,
   y: 4,
