@@ -19,19 +19,18 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   const { name, password } = req.body;
-
   if (!name || !password) {
     throw new CustomError.BadRequestError("Please, provide name and password");
   }
   const user = await User.findOne({ name });
 
   if (!user) {
-    throw new CustomError.UnauthenticatedError("No such name registered");
+    throw new CustomError.BadRequestError("No such name registered");
   }
 
   const isPasswordCorrect = await user.comparePassword(password);
   if (!isPasswordCorrect) {
-    throw new CustomError.UnauthenticatedError("Incorrect name or password");
+    throw new CustomError.BadRequestError("Incorrect name or password");
   }
   const tokenUser = createTokenUser(user);
   attachCookiesToResponse({ res, user: tokenUser });

@@ -1,7 +1,15 @@
+require("dotenv").config();
+const cors = require("cors");
 const express = require("express");
 require("express-async-errors");
 const app = express();
-require("dotenv").config();
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+    exposedHeaders: ["Set-Cookie", "Date", "ETag"],
+  })
+);
 const cookieParser = require("cookie-parser");
 
 app.use(express.json());
