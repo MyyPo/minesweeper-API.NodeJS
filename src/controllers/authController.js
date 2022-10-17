@@ -39,10 +39,16 @@ const login = async (req, res) => {
 };
 
 const logout = async (req, res) => {
-  res.cookie("token", "logout", {
-    httpOnly: true,
-    expires: new Date(Date.now() + 1000),
-  });
+  // removes both access cookie and a cookie indicating authenticated client
+  res
+    .cookie("token", "logout", {
+      httpOnly: true,
+      expires: new Date(Date.now()),
+    })
+    .cookie("expires", "logout", {
+      httpOnly: false,
+      expires: new Date(Date.now()),
+    });
   res.status(StatusCodes.OK).json({ msg: "You've logged out" });
 };
 
