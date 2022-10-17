@@ -18,6 +18,7 @@ const playGame = async (req, res) => {
         msg: "Coordinates were not provided, so here is your current game state",
         // field: currentGame.field,
         uncoveredField: currentGame.uncoveredField,
+        width: currentGame.width,
       });
     } else {
       [x, y] = sanitizeTurn(x, y, currentGame);
@@ -30,6 +31,7 @@ const playGame = async (req, res) => {
           msg: "Game over",
           field: currentGame.field,
           uncoveredField: currentGame.uncoveredField,
+          width: currentGame.width,
         });
       } else {
         const newUncoveredField = Service.uncoverCoords(
@@ -49,6 +51,7 @@ const playGame = async (req, res) => {
           msg: "Turn made",
           // field: currentGame.field,
           uncoveredField: currentGame.uncoveredField,
+          width: currentGame.width,
         });
       }
     }

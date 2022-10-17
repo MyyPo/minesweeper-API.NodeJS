@@ -53,7 +53,11 @@ const startCustomGame = async (req, res) => {
   });
   res
     .status(StatusCodes.CREATED)
-    .json({ msg: "Custom game created!", uncoveredField: uncoveredField });
+    .json({
+      msg: "Custom game created!",
+      uncoveredField: uncoveredField,
+      width: width,
+    });
 };
 
 const startRankedGame = async (req, res) => {
@@ -78,8 +82,8 @@ const startRankedGame = async (req, res) => {
 
   res.status(StatusCodes.CREATED).json({
     msg: "Ranked game created!",
-    field: field,
     uncoveredField: uncoveredField,
+    width: 16,
   });
 };
 
