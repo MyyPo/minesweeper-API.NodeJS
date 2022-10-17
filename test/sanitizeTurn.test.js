@@ -14,7 +14,7 @@ const correctValues = {
 test("Viable values provided, reduce them by 1 to match array indexes further", () => {
   expect(
     sanitizeTurn(correctValues.x, correctValues.y, correctValues.game)
-  ).toEqual([3, 0]);
+  ).toEqual([4, 1]);
 });
 
 const outOfRangeValues = {

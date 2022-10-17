@@ -56,9 +56,9 @@ const playGame = async (req, res) => {
       }
     }
   } else {
-    throw new CustomError.BadRequestError(
+    throw new CustomError.NotFoundError(
       `This user doesn't have an active game, please, create one first.`,
-      400
+      404
     );
   }
 };

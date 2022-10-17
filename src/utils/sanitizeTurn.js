@@ -7,9 +7,8 @@ const sanitizeTurn = (x, y, game) => {
       400
     );
   }
-  x -= 1;
-  y -= 1;
-  if (x > game.width || x < 0 || y > game.height || y < 0) {
+  // reduce all values by one, since array
+  if (x - 1 > game.width || x - 1 < 0 || y - 1 > game.height || y - 1 < 0) {
     throw new CustomError.BadRequestError(
       `Your coordinates ${x + 1} or ${y + 1} are outside of the field`,
       400
