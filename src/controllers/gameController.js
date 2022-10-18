@@ -13,7 +13,7 @@ const playGame = async (req, res) => {
   let { x, y } = req.body;
   const currentGame = await Game.findOne({ user: req.user.userId });
   if (currentGame) {
-    if (!x || !y) {
+    if (typeof x === "undefined" || typeof y === "undefined") {
       res.status(StatusCodes.OK).json({
         msg: "Coordinates were not provided, so here is your current game state",
         // field: currentGame.field,
