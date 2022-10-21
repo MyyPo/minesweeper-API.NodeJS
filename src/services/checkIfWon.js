@@ -1,3 +1,4 @@
+// placeholder
 const checkIfWon = (field, uncoveredField) => {
   return uncoveredField.every((row, y) =>
     row.every((cell, x) => {
